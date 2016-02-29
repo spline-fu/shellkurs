@@ -644,9 +644,8 @@ Diese Präsentation wurde erstellt mit landslide
 
 ::
     
-    wget -O shell.rst "http://pad.spline.de/ep/pad/export/shellslides/latest?format=txt"
-        && landslide shell.rst -i 
-        && scp presentation.html fob:public_html/webroot/shell.html
+    git clone git://git.spline.de/misc/shellkurs && cd shellkurs
+    landslide -i shell.rst -d shell.html
+    scp shell.html fob:public_html/webroot/shell.html
 
-Diese Präsentations steht unter `cc-by-sa <http://creativecommons.org/licenses/by-sa/3.0/de/>`_ Lizenz. 
-
+Diese Präsentations steht unter `cc-by-sa <http://creativecommons.org/licenses/by-sa/3.0/de/>`_ Lizenz. Autor_innen siehe erste Folie.
