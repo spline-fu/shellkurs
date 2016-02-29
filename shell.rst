@@ -1,6 +1,7 @@
 Shell in Schnell
 ----------------
 
+.
 
 -----
 
@@ -97,7 +98,7 @@ Parameter werden benutzt, um Kommandozeilen-Programme zusätzliche Informationen
 
     $ ls
     $ ls /usr
-    $ ls / /usr
+    $ cowsay "hallo du"
 
 ----
 
@@ -109,6 +110,7 @@ Optionen verändern die Arbeitsweise von Programmen. Zum Beispiel welche oder wi
 ::
 
     $ ls -l -h -t -r
+    $ cowsay -d "hallo du"
 
 Die meisten Optionen gibt es in einer langen und einer kurzen Version. Kurze haben ein ``-`` und einen Buchstaben, lange fangen mit zwei ``--`` an:
 
@@ -213,6 +215,7 @@ Pfade können immer absolut oder relativ (heißt: in Abhängigkeit vom aktuellen
 
 Folgende Beispiele zeigen immer auf den selben Ordner (wenn wir uns in /dev befinden):
 ::
+
     $ pwd
     /dev
     $ ls /dev/fd # absoluter Pfad
