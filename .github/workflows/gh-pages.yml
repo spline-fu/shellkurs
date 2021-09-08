@@ -15,12 +15,14 @@ jobs:
           sudo apt-get update 
           sudo apt-get -y upgrade 
           sudo apt-get -y install darkslide
+      - name: Create output directory
+        run: mkdir output
       - name: Generate presentation
-        run: darkslide -i shell.rst -d index.html
+        run: darkslide -i shell.rst -d output/index.html
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: gh-pages
-          build_dir: .
+          build_dir: output
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
