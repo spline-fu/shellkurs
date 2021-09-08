@@ -11,7 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install darkslides
-        run: apt-get update && apt-get -y upgrade && apt-get -y install darkslide
+        run: |
+        sudo apt-get update 
+        sudo apt-get -y upgrade 
+        sudo apt-get -y install darkslide
       - name: Generate presentation
         run: darkslide -i shell.rst -d index.html
       - name: Deploy to GitHub Pages
