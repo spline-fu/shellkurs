@@ -5,7 +5,7 @@ Shell in Schnell
 
 -----
 
-Diese Folien: http://marian.spline.de/shell.html
+Diese Folien: https://spline-fu.github.io/shellkurs/
 
 Erstellt von Lusy, Yves, Philipp, Alex, Marian, Marco
 
@@ -311,7 +311,7 @@ Eingabehilfen: Tabcompletion
 
 Schreib die Hälfte eines Befehls oder Dateinamens und drück [TAB] aka Tabulatortaste.
 
-.. image:: http://www.fene-blog.de/wp-content/uploads/2010/01/Tabtaste.jpg
+.. image:: https://spline-fu.github.io/shellkurs/tab.jpg
 
 ----
 
@@ -443,7 +443,7 @@ Pipes
 
 Statt Dateien oder Zeichenketten als Argumente anzugeben, können wir auch die Ausgabe eines anderen Befehls als Eingabe verwenden. Dazu brauchen wir die Pipe ``|``.
 
-.. image:: http://marian.spline.de/shell/pipe.jpg
+.. image:: https://spline-fu.github.io/shellkurs/pipe.jpg
 
 
 ::
@@ -640,12 +640,12 @@ Links
 
 ----
 
-Diese Präsentation wurde erstellt mit landslide
+Diese Präsentation wurde erstellt mit darkslide
 
 ::
     
-    git clone git://git.spline.de/misc/shellkurs && cd shellkurs
-    landslide -i shell.rst -d shell.html
+    git clone https://gitlab.spline.inf.fu-berlin.de/spline/talks/shellkurs.git && cd shellkurs
+    darkslide -i shell.rst -d shell.html
     scp shell.html fob:public_html/webroot/shell.html
 
 Diese Präsentations steht unter `cc-by-sa <http://creativecommons.org/licenses/by-sa/3.0/de/>`_ Lizenz. Autor_innen siehe erste Folie.
