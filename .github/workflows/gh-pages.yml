@@ -1,0 +1,23 @@
+name: Build and Publish to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install darkslides
+        run: apt-get update && apt-get -y upgrade && apt-get -y install darkslide
+      - name: Generate presentation
+        run: darkslide -i shell.rst -d index.html
+      - name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
