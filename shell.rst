@@ -7,7 +7,8 @@ Shell in Schnell
 
 Diese Folien: https://spline-fu.github.io/shellkurs/
 
-Erstellt von Lusy, Yves, Philipp, Alex, Marian, Marco
+Erstellt von bngs, cent, jrt
+Adaption der Arbeit von: Lusy, Yves, Philipp, Alex, Marian, Marco
 
 ----
 
@@ -30,31 +31,52 @@ Gib alle Wörter einer Datei und ihre Häufigkeiten aus
 
 ----
 
+Warum CLI statt GUI?
+--------------------
 
-Wie starte ich die Shell?
--------------------------
+- Die graphische Oberfläche (GUI) ist explorativ, aber nicht effizient
+- Das Terminal (CLI) ist effizienter, wenn man weiß was man will
+- Terminaleingaben sind leicht automatisierbar und wiederholbar
+
+----
+
+Was kann ich damit alles machen?
+--------------------------------
+
+* Im Dateisystem navigieren
+* Verzeichnisse/Dateien erstellen/löschen/kopieren
+* Programme starten
+* Einfache (oder auch kompliziertere) Operationen auf Texten ausführen
+* Quelltext Versions Verwaltung (git,...)
+* und vieles mehr. (eigentlich alles.)
+
+----
+
+
+Wie öffne ich ein Terminal?
+---------------------------
 
 Mehrere Alternativen:
 
-* Terminalemulator starten (gnome-terminal, xfce-terminal oder konsole)
-* [Strg]-[Alt]-[t]  ( startet auch Terminalemulator)
-* [Alt]-[F2] -- öffnet Fenster, wo man den Namen des gewünschten Programms eintippen kann
-* [Strg]-[Alt]-[F2]
-* https://www.zedat.fu-berlin.de/shell/
-* Login von einem Windows-PC mit PuTTY (nächste Folie)
+* LINUX: Terminalemulator starten (terminal, gnome terminal oder konsole)
+* LINUX: Super bzw. Meta (Windows-Taste), anfangen "Terminal" zu schreiben und enter drücken
+* WINDOWS: PowerShell (ssh zedatnutzer@andorra.imp.fu-berlin.de)
+* Mobilgeräte: Nur wenn es nicht anders geht!
+* ANDROID: Termux (via F-Droid) (pkg install openssh && ssh zedatnutzer@andorra.imp.fu-berlin.de)
+* iPhone/iPad: Termius
 
 -----
 
-PuTTY
------
+Windows
+-------
 
-Putty ist ein SSH-Client-Programm für Windows, d.h. man kann sich damit zu einem Linuxrechner verbinden und hat dann eine Shell, in der man auf dem anderen Rechner arbeiten kann.
+In modernen Versionen von Windows ist SSH enthalten, jedoch kein sinnvolles Terminal. Um ein sinnvolles Terminal zu erhalten, öffnet eine Eingabeaufforderung (cmd.exe) und gebt den folgenden Befehl ein:
 
-Generelle `Anleitung der Zedat <http://www.zedat.fu-berlin.de/tip4u_03.pdf>`_ befolgen, außer dass als Rechnername einen der Poolrechner angeben muss. Die findet man `beim Rechnerbetrieb <http://www.mi.fu-berlin.de/w/IT/ServicesStudentPools>`_.
+::
 
-Der Host-Key wird auch anders sein als in der Anleitung, da jeder Rechner seinen eigenen hat. (Dieser Abgleich dient dazu, sicher zu stellen, dass die Verbindung nicht manipuliert ist und man wirklich dem richtigen Server sein Passwort verrät.) Verbindet euch am besten beim ersten Mal aus dem Uni-WLAN, der Key wird dann gespeichert und beim nächsten Verbinden seid ihr sicher.
+    winget install --id Microsoft.WindowsTerminal
 
-Um Dateien zwischen eurem Rechner und den Poolrechnern zu kopieren, könnt ihr das zu Putty gehörende PSFTP benutzen (Download nicht bei der Zedat sondern nur auf der `Projektseite <http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html>`_ selbst).
+Alternativ könnt ihr auch die `Anleitung der Zedat <http://www.zedat.fu-berlin.de/tip4u_03.pdf>`_ folgen, jedoch müsst ihr bei Rechnername ``andorra.imp.fu-berlin.de`` angeben.
 
 ----
 
@@ -66,7 +88,6 @@ Mehrere Alternativen:
 * Fenster (Terminalemulator) schließen
 * [Strg]-[d] beendet Shell
 * Eingabe von exit
-* Eingabe von logout (manchmal)
 
 ----
 
@@ -79,14 +100,12 @@ Der erste Befehl
     
 ----
 
-Was kann ich damit alles machen?
---------------------------------
+Aufbau eines Befehls
+--------------------
 
-* Im Dateisystem navigieren
-* Verzeichnisse/Dateien erstellen/löschen/kopieren
-* Programme starten
-* Einfache (oder auch kompliziertere) Operationen auf Texten ausführen
-* und vieles mehr. (eigentlich alles.)
+::
+
+    $ programm -f --flag argument1 argument2
 
 ----
 
@@ -98,19 +117,18 @@ Parameter werden benutzt, um Kommandozeilen-Programme zusätzliche Informationen
 
     $ ls
     $ ls /usr
-    $ cowsay "hallo du"
 
 ----
 
-Befehle mit Optionen
---------------------
+Befehle mit Optionen/Flags
+--------------------------
 
-Optionen verändern die Arbeitsweise von Programmen. Zum Beispiel welche oder wie viele Informationen sie ausgeben.
+Optionen/Flags verändern die Arbeitsweise von Programmen. Zum Beispiel welche oder wie viele Informationen sie ausgeben.
 
 ::
 
-    $ ls -l -h -t -r
-    $ cowsay -d "hallo du"
+    $ ls -l -h -a
+    $ python -i datei.py
 
 Die meisten Optionen gibt es in einer langen und einer kurzen Version. Kurze haben ein ``-`` und einen Buchstaben, lange fangen mit zwei ``--`` an:
 
@@ -123,7 +141,7 @@ Kurze Optionen können kombiniert werden:
 
 ::
 
-    $ ls -lhtr
+    $ ls -lha
 
 ----
 
@@ -134,14 +152,14 @@ Es gibt Optionen, die stehen nicht für sich, sondern erwarten noch einen Parame
 
 ::
 
-    $ ls -lh --ignore '*.pdf'
-    $ ls -lh *.pdf
+    $ ls -lh --ignore 'foo.pdf'
+    $ ls -lh foo.pdf
 
 Achtet darauf, was zur Option gehört und was ein allgemeiner Parameter ist:
 
 ::
 
-    $ ls -lh --ignore 's*' /
+    $ ls -lh --ignore 'foo.pdf' /
 
 
 ----
@@ -156,17 +174,17 @@ Wir können die Eingabe verkürzen:
 
 ::
 
-    $ touch aBBB aCCC CCbC CCaC CCaaC
-    $ ls CC?C
-    $ ls CC*C
+    $ touch foo bar brr foobar
+    $ ls fo*
+    $ ls b?r
     $ ls *
 
 Diese Wildcards werden direkt von der Shell interpretiert, das heißt, sie funktionieren mit jedem Programm. Das Programm kriegt davon gar nichts mit. Wollen wir das nicht, müssen wir Anführungszeichen benutzen.
 
 ::
 
-    $ echo CC*
-    $ echo 'CC*'
+    $ echo fo*
+    $ echo 'fo*'
 
 ----
 
@@ -192,37 +210,8 @@ Augen auf:
 
     $ ls
     $ ls -lh
-    $ ls -R
     $ ls -la
     
-----
-    
-Verzeichnisse wechseln
-----------------------
-
-::
-
-    $ cd /tmp   
-    $ cd ~      # ins home directory wechseln
-    $ cd        # auch 
-    $ cd ..     # ins darüberliegende Verzechnis wechseln
-    $ cd -      # ins letzte Verzeichnis wechseln
-    $ pwd       # zeigt wo wir sind
-    /home/...
-
-Den Weg zu einem Ordner oder Datei bezeichnen wir als Pfad.
-Pfade können immer absolut oder relativ (heißt: in Abhängigkeit vom aktuellen Ordner) angegeben werden.
-
-Folgende Beispiele zeigen immer auf den selben Ordner (wenn wir uns in /dev befinden):
-::
-
-    $ pwd
-    /dev
-    $ ls /dev/fd # absoluter Pfad
-    $ ls fd # relativer Pfad
-    $ ls ../dev/fd # auch relativ (.. ist der Eltern-Ordner)
-
-
 ----
 
 Linux-Verzeichnisstruktur
@@ -254,6 +243,35 @@ Linux-Verzeichnisstruktur
 
 ----
 
+Verzeichnisse wechseln
+----------------------
+
+::
+
+    $ cd /tmp   
+    $ cd ~      # ins home directory wechseln
+    $ cd        # auch 
+    $ cd ..     # ins darüberliegende Verzechnis wechseln
+    $ cd -      # ins letzte Verzeichnis wechseln
+    $ pwd       # zeigt wo wir sind
+    /home/...
+
+~ = $HOME = /home/nutzername
+
+Den Weg zu einem Ordner oder Datei bezeichnen wir als Pfad.
+Pfade können immer absolut oder relativ (heißt: in Abhängigkeit vom aktuellen Ordner) angegeben werden.
+
+Folgende Beispiele zeigen immer auf den selben Ordner (wenn wir uns in /dev befinden):
+::
+
+    $ pwd
+    $ ls /dev/fd # absoluter Pfad
+    $ ls fd # relativer Pfad
+    $ ls ../dev/fd # auch relativ (.. ist der Eltern-Ordner)
+
+
+----
+
 Hilfe zur Selbsthilfe
 ---------------------
 
@@ -262,6 +280,7 @@ Beschreibt was ein Befehl tut, die möglichen Optionen und Parameter, und gibt H
 ::
 
     $ man <Befehlname> 
+    $ man man
 
 Mit ``q`` kommt man zurück zur Shell.
 
@@ -272,6 +291,8 @@ Meistens geht auch:
     $ <befehl> --help
     $ <befehl> -h
 
+Manchmal Befehl ohne Argumente
+
 ----
 
 Operationen auf Dateien
@@ -279,11 +300,10 @@ Operationen auf Dateien
 
 ::
 
-    $ cat > somefile.txt                # beenden mit strg-d
+    $ cat >> somefile.txt                # beenden mit strg-d
     $ cp somefile.txt otherfile.txt     # copy
     $ mv otherfile.txt anotherfile.txt  # move
     $ rm somefile.txt anotherfile.txt   # remove
-    $ rm -i somefile.txt                # remove, fragt vor dem Löschen
 
 
 ----
@@ -296,13 +316,9 @@ Geht auch alles (so ähnlich) auf Ordner:
 ::
 
     $ mkdir aFolder           # make directory
-    $ cp -a aFolder bFolder   # copy
+    $ cp -r aFolder bFolder   # copy
     $ mv aFolder cFolder      # move
-    $ cat > cFolder/file
-    $ rmdir bFolder           # remove directory
-    $ rmdir cFolder           # geht nicht!
     $ rm -r cFolder           # löscht alles was drin ist
-    $ rm -ri cFolder          # dito, aber fragt vorher
 
 ----
 
@@ -321,7 +337,7 @@ Aus der Shell kann man Programme, die in der Shell laufen, starten:
 
 ::
 
-    $ python
+    $ python3
     >>> 3+5
     8
 
@@ -479,21 +495,21 @@ Shell auf einem entfernten Rechner öffnen:
 
 ::
 
-    $ ssh <username>@peking.imp.fu-berlin.de
+    $ ssh <username>@andorra.imp.fu-berlin.de
 
 Dateien auf einen bzw. von einem anderen Rechner kopieren:
 
 ::
 
     $ date > DATEINAME
-    $ scp DATEINAME <username>@peking.imp.fu-berlin.de:/tmp
-    $ scp <username>@peking.imp.fu-berlin.de:/tmp/DATEINAME DATEINAME_2
+    $ scp DATEINAME <username>@andorra.imp.fu-berlin.de:/tmp
+    $ scp <username>@andorra.imp.fu-berlin.de:/tmp/DATEINAME DATEINAME_2
 
 Befehl auf einem anderen Rechner ausführen, z.B. rm:
 
 ::
 
-    $ ssh peking rm /tmp/DATEINAME
+    $ ssh andorra rm /tmp/DATEINAME
 
 ssh fungiert auch als pipe zwischen den Rechnern
 
@@ -502,21 +518,6 @@ ssh fungiert auch als pipe zwischen den Rechnern
     cat file.pdf | ssh <username>@andorra.imp.fu-berlin.de lp -
 
 ----
-
-Nützliche Befehle: finger
--------------------------
-
-Praktisch, um z.B. den Namen oder eine Mailadresse von Kommiliton*innen rauszufinden.
-
-::
-
-    $ finger schulze
-    $ finger flexo3001
-
-Die Mailadresse ist dann einfach <das was hinter ``Login:`` steht>@mi.fu-berlin.de
-
-----
-
 
 
 Nützliche Befehle: less
@@ -633,9 +634,9 @@ Ihr könnt gerne jederzeit im Spline-Raum (Raum K60) vorbeikommen, die meisten M
 Links
 -----
 
-* Learning the shell: http://linuxcommand.org/learning_the_shell.php
+* Learning the shell: https://web.archive.org/web/20161001014753/http://linuxcommand.org/learning_the_shell.php
 * Teaching Unix: http://www.ee.surrey.ac.uk/Teaching/Unix/
-* Learning Unix in 10 Minutes: http://freeengineer.org/learnUNIXin10minutes.html
+* Learning Unix in 10 Minutes: https://web.archive.org/web/20160727225944/http://freeengineer.org/learnUNIXin10minutes.html
 
 
 ----
